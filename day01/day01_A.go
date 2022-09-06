@@ -10,7 +10,7 @@ import (
 func ReadIntegerLines() []int {
 
 	f, err := os.Open("input.txt")
-	arr := make([]int, 100)
+	arr := make([]int, 0)
 	if err != nil {
 		fmt.Println("Error while reading.")
 	}
