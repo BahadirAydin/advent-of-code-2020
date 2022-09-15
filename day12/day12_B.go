@@ -11,12 +11,7 @@ type Direction struct {
 	code  string
 	value int
 }
-type Ship struct {
-	xPos int
-	yPos int
-	dir  string
-}
-type Waypoint struct {
+type Point struct {
 	xPos int
 	yPos int
 }
@@ -37,7 +32,7 @@ func ReadIntegerLines() []Direction {
 	}
 	return arr
 }
-func updateShip(ship *Ship, p *Waypoint, dir Direction) {
+func updatePoint(ship *Point, p *Point, dir Direction) {
 	code := dir.code
 	value := dir.value
 	if code == "N" {
@@ -60,7 +55,7 @@ func updateShip(ship *Ship, p *Waypoint, dir Direction) {
 	}
 }
 
-func rotatePoint(angle int, p *Waypoint) {
+func rotatePoint(angle int, p *Point) {
 	if angle == 90 {
 		tmp := p.xPos
 		p.xPos = -1 * p.yPos
@@ -77,13 +72,12 @@ func rotatePoint(angle int, p *Waypoint) {
 
 func main() {
 	data := ReadIntegerLines()
-	var ship Ship
-	var p Waypoint
-	p.xPos = 10
-	p.yPos = 1
-	ship.dir = "E"
+	var ship Point
+	var waypoint Point
+	waypoint.xPos = 10
+	waypoint.yPos = 1
 	for _, v := range data {
-		updateShip(&ship, &p, v)
+		updatePoint(&ship, &waypoint, v)
 	}
 	x := ship.xPos
 	y := ship.yPos
