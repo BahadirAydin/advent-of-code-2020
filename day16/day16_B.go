@@ -18,7 +18,7 @@ type Criteria struct {
 	c2 Compare
 }
 
-func ReadCriteria() ([]Criteria, string, []string) {
+func ReadLines() ([]Criteria, string, []string) {
 
 	f, _ := os.Open("input.txt")
 	defer f.Close()
@@ -140,7 +140,7 @@ func findValidTickets(criteria []Criteria, tickets [][]int) [][]int {
 }
 
 func main() {
-	criteria, myTicket, nearbyTickets := ReadCriteria()
+	criteria, myTicket, nearbyTickets := ReadLines()
 	tickets := modifyTickets(nearbyTickets)
 	myTicketInt := modifyTicket(myTicket)
 	validTickets := findValidTickets(criteria, tickets)

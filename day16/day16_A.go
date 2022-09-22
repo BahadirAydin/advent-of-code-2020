@@ -18,7 +18,7 @@ type Criteria struct {
 	c2 Compare
 }
 
-func ReadCriteria() ([]Criteria, string, []string) {
+func ReadLines() ([]Criteria, string, []string) {
 
 	f, _ := os.Open("input.txt")
 	defer f.Close()
@@ -100,7 +100,7 @@ func findInvalid(criteria []Criteria, ticket []int) int {
 }
 
 func main() {
-	criteria, _, nearbyTickets := ReadCriteria()
+	criteria, _, nearbyTickets := ReadLines()
 	tickets := modifyTickets(nearbyTickets)
 	sum := 0
 	for _, v := range tickets {
