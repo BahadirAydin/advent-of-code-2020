@@ -111,19 +111,11 @@ func activeNeighbors(n [80]Point) (c int) {
 	}
 	return
 }
-func activeCount(data []Point) (c int) {
-	for _, v := range data {
-		if v.active {
-			c++
-		}
-	}
-	return
-}
 func main() {
 	data := ReadLines()
 	for i := 0; i < 6; i++ {
 		increaseBoundary(&data)
 		turn(&data)
 	}
-	fmt.Println(activeCount(data))
+	fmt.Println(len(data))
 }
