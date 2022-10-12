@@ -146,7 +146,7 @@ func allOrientations(t Tile) (all [12]Tile) {
 	}
 	return
 }
-func findLeft(index int, data []Tile, used *[]int) int {
+func findLeft(index int, data []Tile) int {
 	leftBorder := findBorder(data[index], "left")
 	for k, v := range data {
 		if k == index {
@@ -157,14 +157,13 @@ func findLeft(index int, data []Tile, used *[]int) int {
 			rightBorder := findBorder(v2, "right")
 			if leftBorder == rightBorder {
 				data[k] = v2
-				*used = append(*used, k)
 				return 1
 			}
 		}
 	}
 	return 0
 }
-func findRight(index int, data []Tile, used *[]int) int {
+func findRight(index int, data []Tile) int {
 	rightBorder := findBorder(data[index], "right")
 	for k, v := range data {
 		if k == index {
@@ -175,7 +174,6 @@ func findRight(index int, data []Tile, used *[]int) int {
 			leftBorder := findBorder(v2, "left")
 			if rightBorder == leftBorder {
 				data[k] = v2
-				*used = append(*used, k)
 				return 1
 			}
 
@@ -183,7 +181,7 @@ func findRight(index int, data []Tile, used *[]int) int {
 	}
 	return 0
 }
-func findTop(index int, data []Tile, used *[]int) int {
+func findTop(index int, data []Tile) int {
 	topBorder := findBorder(data[index], "top")
 	for k, v := range data {
 		if k == index {
@@ -194,14 +192,13 @@ func findTop(index int, data []Tile, used *[]int) int {
 			bottomBorder := findBorder(v2, "bottom")
 			if topBorder == bottomBorder {
 				data[k] = v2
-				*used = append(*used, k)
 				return 1
 			}
 		}
 	}
 	return 0
 }
-func findBottom(index int, data []Tile, used *[]int) int {
+func findBottom(index int, data []Tile) int {
 	bottomBorder := findBorder(data[index], "bottom")
 	for k, v := range data {
 		if k == index {
@@ -218,20 +215,19 @@ func findBottom(index int, data []Tile, used *[]int) int {
 	}
 	return 0
 }
-func execute(index int, data []Tile, used *[]int) (sum int) {
-	sum += findLeft(index, data, used)
-	sum += findRight(index, data, used)
-	sum += findTop(index, data, used)
-	sum += findBottom(index, data, used)
+func execute(index int, data []Tile) (sum int) {
+	sum += findLeft(index, data)
+	sum += findRight(index, data)
+	sum += findTop(index, data)
+	sum += findBottom(index, data)
 	//above four functions used can be combined into a single function since the left-right-up-bottom does not have a real meaning in the problem but it works and I don't want to do it :)
 	return
 }
 func main() {
 	data := ReadLines()
-	used := make([]int, 0)
 	res := 1
 	for i := 0; i < len(data); i++ {
-		n := execute(i, data, &used)
+		n := execute(i, data)
 		if n == 2 {
 			fmt.Println(data[i].id)
 			res *= data[i].id
