@@ -6,7 +6,6 @@ sum = 0
 flag = True
 for i in range(len(lines)):
     line = lines[i]
-    print(curr,sum)
     if line == '\n':
         sum += len(curr)-1
         curr = set()
